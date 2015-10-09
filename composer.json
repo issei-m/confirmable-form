@@ -1,0 +1,30 @@
+{
+    "name": "issei-m/confirmable-form",
+    "description": "fixme",
+    "type": "library",
+    "keywords": ["form", "confirmable", "symfony"],
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Issei Murasawa",
+            "email": "issei.m7@gmail.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "Issei\\ConfirmableForm\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Issei\\ConfirmableForm\\Tests\\": "tests/"
+        }
+    },
+    "require": {
+        "php": ">=5.4",
+        "symfony/form": "~2.3"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "~4.8"
+    }
+}

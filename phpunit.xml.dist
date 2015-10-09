@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- http://www.phpunit.de/manual/current/en/appendixes.configuration.html -->
+<phpunit bootstrap = "./vendor/autoload.php" colors="true">
+    <testsuites>
+        <testsuite name="Project Test Suite">
+            <directory>./tests/</directory>
+        </testsuite>
+    </testsuites>
+
+    <filter>
+        <whitelist>
+            <directory suffix=".php">./src</directory>
+            <exclude>
+                <directory>./res</directory>
+            </exclude>
+        </whitelist>
+    </filter>
+</phpunit>
