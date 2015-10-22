@@ -1,6 +1,6 @@
 {
     "name": "issei-m/confirmable-form",
-    "description": "fixme",
+    "description": "Provides the `OperationType` form type needed to implement confirmable form (i.e. two-step form), and extension to install it to your project's form.",
     "type": "library",
     "keywords": ["form", "confirmable", "symfony"],
     "license": "MIT",
@@ -26,5 +26,10 @@
     },
     "require-dev": {
         "phpunit/phpunit": "~4.8"
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "1.0-dev"
+        }
     }
 }
