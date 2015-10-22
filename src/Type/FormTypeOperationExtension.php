@@ -29,7 +29,7 @@ class FormTypeOperationExtension extends AbstractTypeExtension
                 $form = $event->getForm();
 
                 if ($form->isRoot() && $form->getConfig()->getOption('compound')) {
-                    $form->add('_operation', new OperationType(), ['auto_initialize' => false]);
+                    $form->add('_operation', 'confirmable_form_operation', ['auto_initialize' => false]);
                 }
             })
         ;
