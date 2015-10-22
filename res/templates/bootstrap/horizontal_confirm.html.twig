@@ -1,0 +1,13 @@
+{% block text_widget -%}
+    <p class="form-control-static">
+        {{- form.vars.data -}}
+    </p>
+    {{- block('hidden_widget') -}}
+{%- endblock %}
+
+{% block textarea_widget -%}
+    <p class="form-control-static">
+        {{- form.vars.data|nl2br -}}
+    </p>
+    {{- block('hidden_widget') -}}
+{%- endblock %}

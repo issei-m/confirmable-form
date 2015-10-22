@@ -1,0 +1,11 @@
+{% block button_row -%}
+    {{- form_widget(form) -}}
+{%- endblock %}
+
+{% block confirmable_form_operation_row -%}
+    <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-10">
+            {{- form_widget(form) -}}
+        </div>
+    </div>
+{%- endblock %}
