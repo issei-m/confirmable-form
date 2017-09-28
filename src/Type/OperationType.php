@@ -2,6 +2,7 @@
 
 namespace Issei\ConfirmableForm\Type;
 
+use Issei\ConfirmableForm\CompatibilityHelper;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormInterface;
@@ -18,10 +19,15 @@ class OperationType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
+        $submitType = CompatibilityHelper::isFormLegacy()
+            ? 'submit'
+            : 'Symfony\Component\Form\Extension\Core\Type\SubmitType'
+        ;
+
         $builder
-            ->add('confirm', 'submit', ['label' => '確認'])
-            ->add('back',    'submit', ['label' => '戻る'])
-            ->add('commit',  'submit', ['label' => '送信'])
+            ->add('confirm', $submitType, ['label' => '確認'])
+            ->add('back',    $submitType, ['label' => '戻る'])
+            ->add('commit',  $submitType, ['label' => '送信'])
         ;
     }
 
@@ -49,8 +55,16 @@ class OperationType extends AbstractType
     /**
      * {@inheritdoc}
      */
-    public function getName()
+    public function getBlockPrefix()
     {
         return 'confirmable_form_operation';
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getName()
+    {
+        return $this->getBlockPrefix();
     }
 }
