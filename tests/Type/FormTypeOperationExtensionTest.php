@@ -18,12 +18,12 @@ class FormTypeOperationExtensionTest extends TypeTestCase
 
         $formType = CompatibilityHelper::isFormLegacy()
             ? 'form'
-            : '\Symfony\Component\Form\Extension\Core\Type\FormType'
+            : 'Symfony\Component\Form\Extension\Core\Type\FormType'
         ;
 
         $hiddenType = CompatibilityHelper::isFormLegacy()
             ? 'hidden'
-            : '\Symfony\Component\Form\Extension\Core\Type\HiddenType'
+            : 'Symfony\Component\Form\Extension\Core\Type\HiddenType'
         ;
 
         $this->form = $this->factory->createBuilder($formType, null, ['confirmable' => true])
