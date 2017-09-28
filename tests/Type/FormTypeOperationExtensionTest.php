@@ -2,9 +2,8 @@
 
 namespace Issei\ConfirmableForm\Tests\Type;
 
-use Issei\ConfirmableForm\ConfirmableFormExtension;
+use Issei\ConfirmableForm\CompatibilityHelper;
 use Symfony\Component\Form\FormInterface;
-use Symfony\Component\Form\Test\TypeTestCase;
 
 class FormTypeOperationExtensionTest extends TypeTestCase
 {
@@ -13,19 +12,22 @@ class FormTypeOperationExtensionTest extends TypeTestCase
      */
     private $form;
 
-    protected function getExtensions()
-    {
-        return [
-            new ConfirmableFormExtension(),
-        ];
-    }
-
     protected function setUp()
     {
         parent::setUp();
 
-        $this->form = $this->factory->createBuilder('form', null, ['confirmable' => true])
-            ->add('foo', 'hidden')
+        $formType = CompatibilityHelper::isFormLegacy()
+            ? 'form'
+            : 'Symfony\Component\Form\Extension\Core\Type\FormType'
+        ;
+
+        $hiddenType = CompatibilityHelper::isFormLegacy()
+            ? 'hidden'
+            : 'Symfony\Component\Form\Extension\Core\Type\HiddenType'
+        ;
+
+        $this->form = $this->factory->createBuilder($formType, null, ['confirmable' => true])
+            ->add('foo', $hiddenType)
             ->getForm()
         ;
     }

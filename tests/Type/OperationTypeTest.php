@@ -2,14 +2,13 @@
 
 namespace Issei\ConfirmableForm\Tests\Type;
 
-use Issei\ConfirmableForm\Type\OperationType;
-use Symfony\Component\Form\Test\TypeTestCase;
+use Issei\ConfirmableForm\CompatibilityHelper;
 
 class OperationTypeTest extends TypeTestCase
 {
     public function testFields()
     {
-        $form = $this->factory->create(new OperationType());
+        $form = $this->factory->create(CompatibilityHelper::isFormLegacy() ? 'confirmable_form_operation' : 'Issei\ConfirmableForm\Type\OperationType');
         $this->assertCount(3, $form);
 
         $this->assertEquals('確認', $form->get('confirm')->getConfig()->getOption('label'));
@@ -29,10 +28,10 @@ class OperationTypeTest extends TypeTestCase
 
     public function testSubmit()
     {
-        $form = $this->factory->create(new OperationType(), null, ['auto_initialize' => false,]);
+        $form = $this->factory->create(CompatibilityHelper::isFormLegacy() ? 'confirmable_form_operation' : 'Issei\ConfirmableForm\Type\OperationType', null, ['auto_initialize' => false,]);
 
         $baseForm = $this->factory->create();
-        $baseForm->add('foo', 'hidden');
+        $baseForm->add('foo', CompatibilityHelper::isFormLegacy() ? 'hidden' : 'Symfony\Component\Form\Extension\Core\Type\HiddenType');
         $baseForm->add($form);
 
         $baseForm->submit([

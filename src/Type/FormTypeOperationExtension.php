@@ -2,6 +2,7 @@
 
 namespace Issei\ConfirmableForm\Type;
 
+use Issei\ConfirmableForm\CompatibilityHelper;
 use Symfony\Component\Form\AbstractTypeExtension;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormEvent;
@@ -29,7 +30,12 @@ class FormTypeOperationExtension extends AbstractTypeExtension
                 $form = $event->getForm();
 
                 if ($form->isRoot() && $form->getConfig()->getOption('compound')) {
-                    $form->add('_operation', 'confirmable_form_operation', ['auto_initialize' => false]);
+                    $operationType = CompatibilityHelper::isFormLegacy()
+                        ? 'confirmable_form_operation'
+                        : 'Issei\ConfirmableForm\Type\OperationType'
+                    ;
+
+                    $form->add('_operation', $operationType, ['auto_initialize' => false]);
                 }
             })
         ;
@@ -71,6 +77,9 @@ class FormTypeOperationExtension extends AbstractTypeExtension
      */
     public function getExtendedType()
     {
-        return 'form';
+        return CompatibilityHelper::isFormLegacy()
+            ? 'form'
+            : 'Symfony\Component\Form\Extension\Core\Type\FormType'
+        ;
     }
 }
