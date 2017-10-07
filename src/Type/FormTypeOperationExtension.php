@@ -49,7 +49,7 @@ class FormTypeOperationExtension extends AbstractTypeExtension
         if ($options['confirmable'] && isset($view['_operation'])) {
             $operationView = $view['_operation'];
 
-            if ($form->isValid() && $form->get('_operation')->get('confirm')->isClicked()) {
+            if ($form->isSubmitted() && $form->isValid() && $form->get('_operation')->get('confirm')->isClicked()) {
                 unset($operationView['confirm']);
                 $view->vars['position'] = 'confirm';
             } else {
