@@ -38,7 +38,7 @@ class OperationType extends AbstractType
     {
         foreach ($view as $name => $child) {
             // Inserts a block into 2nd from last.
-            array_splice($child->vars['block_prefixes'], -1, 0, [$this->getName() . '_' . $name]);
+            array_splice($child->vars['block_prefixes'], -1, 0, [$this->getBlockPrefix() . '_' . $name]);
         }
     }
 
