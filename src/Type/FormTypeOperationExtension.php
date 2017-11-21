@@ -9,6 +9,7 @@ use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Form\FormView;
+use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
@@ -21,7 +22,7 @@ class FormTypeOperationExtension extends AbstractTypeExtension
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        if (!$options['confirmable']) {
+        if (false === $options['confirmable']) {
             return;
         }
 
@@ -35,7 +36,7 @@ class FormTypeOperationExtension extends AbstractTypeExtension
                         : 'Issei\ConfirmableForm\Type\OperationType'
                     ;
 
-                    $form->add('_operation', $operationType, ['auto_initialize' => false]);
+                    $form->add('_operation', $operationType, array_merge($form->getConfig()->getOption('confirmable'), ['auto_initialize' => false]));
                 }
             })
         ;
@@ -46,7 +47,7 @@ class FormTypeOperationExtension extends AbstractTypeExtension
      */
     public function finishView(FormView $view, FormInterface $form, array $options)
     {
-        if ($options['confirmable'] && isset($view['_operation'])) {
+        if (false !== $options['confirmable'] && isset($view['_operation'])) {
             $operationView = $view['_operation'];
 
             if ($form->isSubmitted() && $form->isValid() && $form->get('_operation')->get('confirm')->isClicked()) {
@@ -68,7 +69,8 @@ class FormTypeOperationExtension extends AbstractTypeExtension
             ->setDefaults([
                 'confirmable' => false,
             ])
-            ->setAllowedTypes('confirmable', 'bool')
+            ->setAllowedTypes('confirmable', ['bool', 'array'])
+            ->setNormalizer('confirmable', function (Options $_, $confirmable) { return true === $confirmable ? [] :  $confirmable; })
         ;
     }
 
