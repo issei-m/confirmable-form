@@ -11,9 +11,9 @@ class OperationTypeTest extends TypeTestCase
         $form = $this->factory->create(CompatibilityHelper::isFormLegacy() ? 'confirmable_form_operation' : 'Issei\ConfirmableForm\Type\OperationType');
         $this->assertCount(3, $form);
 
-        $this->assertEquals('確認', $form->get('confirm')->getConfig()->getOption('label'));
-        $this->assertEquals('戻る', $form->get('back')->getConfig()->getOption('label'));
-        $this->assertEquals('送信', $form->get('commit')->getConfig()->getOption('label'));
+        $this->assertEquals('Confirm', $form->get('confirm')->getConfig()->getOption('label'));
+        $this->assertEquals('Back', $form->get('back')->getConfig()->getOption('label'));
+        $this->assertEquals('Commit', $form->get('commit')->getConfig()->getOption('label'));
 
         $view = $form->createView();
 
@@ -24,6 +24,19 @@ class OperationTypeTest extends TypeTestCase
         foreach (['confirm', 'back', 'commit'] as $name) {
             $this->assertEquals('confirmable_form_operation_' . $name, array_slice($view[$name]->vars['block_prefixes'], -2, 1)[0]);
         }
+    }
+
+    public function testButtonOptions()
+    {
+        $form = $this->factory->create(CompatibilityHelper::isFormLegacy() ? 'confirmable_form_operation' : 'Issei\ConfirmableForm\Type\OperationType', null, [
+            'confirm_options' => ['label' => '確認'],
+            'back_options' => ['label' => '戻る'],
+            'commit_options' => ['label' => '送信'],
+        ]);
+
+        $this->assertEquals('確認', $form->get('confirm')->getConfig()->getOption('label'));
+        $this->assertEquals('戻る', $form->get('back')->getConfig()->getOption('label'));
+        $this->assertEquals('送信', $form->get('commit')->getConfig()->getOption('label'));
     }
 
     public function testSubmit()

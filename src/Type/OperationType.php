@@ -25,9 +25,9 @@ class OperationType extends AbstractType
         ;
 
         $builder
-            ->add('confirm', $submitType, ['label' => '確認'])
-            ->add('back',    $submitType, ['label' => '戻る'])
-            ->add('commit',  $submitType, ['label' => '送信'])
+            ->add('confirm', $submitType, $options['confirm_options'])
+            ->add('back',    $submitType, $options['back_options'])
+            ->add('commit',  $submitType, $options['commit_options'])
         ;
     }
 
@@ -48,7 +48,10 @@ class OperationType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'mapped' => false,
+            'mapped'          => false,
+            'confirm_options' => ['label' => 'Confirm'],
+            'back_options'    => ['label' => 'Back'],
+            'commit_options'  => ['label' => 'Commit'],
         ]);
     }
 
