@@ -51,7 +51,7 @@ class OperationType extends AbstractType
             'mapped'          => false,
             'confirm_options' => ['label' => 'Confirm'],
             'back_options'    => ['label' => 'Back'],
-            'commit_options'  => ['label' => 'Commit'],
+            'commit_options'  => ['label' => 'Send'],
         ]);
     }
 
