@@ -13,7 +13,7 @@ class OperationTypeTest extends TypeTestCase
 
         $this->assertEquals('Confirm', $form->get('confirm')->getConfig()->getOption('label'));
         $this->assertEquals('Back', $form->get('back')->getConfig()->getOption('label'));
-        $this->assertEquals('Commit', $form->get('commit')->getConfig()->getOption('label'));
+        $this->assertEquals('Send', $form->get('commit')->getConfig()->getOption('label'));
 
         $view = $form->createView();
 

@@ -17,7 +17,7 @@ class FormTypeOperationExtensionTest extends TypeTestCase
         $this->assertTrue($form->has('_operation'));
         $this->assertEquals('Confirm', $form->get('_operation')->get('confirm')->getConfig()->getOption('label'));
         $this->assertEquals('Back', $form->get('_operation')->get('back')->getConfig()->getOption('label'));
-        $this->assertEquals('Commit', $form->get('_operation')->get('commit')->getConfig()->getOption('label'));
+        $this->assertEquals('Send', $form->get('_operation')->get('commit')->getConfig()->getOption('label'));
 
         $view = $form->createView();
         $this->assertCount(1, $view['_operation']);
